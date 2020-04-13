@@ -7,7 +7,7 @@ from subprocess import Popen, PIPE
 
 client = InfluxDBClient(host=os.environ['influxdb_host'], port=os.environ['influxdb_port'], database='weather')
 client.create_database('weather')
-with Popen(['/usr/local/bin/rtl_433', '-F', 'json', '-C', 'customary', '-G'], stdout=PIPE, bufsize=1, universal_newlines=True) as data:
+with Popen(['/usr/local/bin/rtl_433', '-F', 'json', '-C', 'customary'], stdout=PIPE, bufsize=1, universal_newlines=True) as data:
     for line in data.stdout:
         try:
             tjson = json.loads(line)
